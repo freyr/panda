@@ -22,5 +22,10 @@
     "psr-4": {
       "Freyr\\Panda\\QA\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Freyr\\Panda\\QA\\Tests\\": "tests/"
+    }
   }
 }
