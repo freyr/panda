@@ -35,6 +35,7 @@ Packets of Jobs are schedule to run on Kubernetes Cluster (Targets).
 * Have priority (1-100, highest, more important)
 * Have Owner (who scheduled them)
 * Have Identity (unique binary string)
+* Are based on some Packet
 * Orders are keeping track of Scheduling progress and status
 * Can override default preference of TargetPolicy from Job (TargetPolicyOverride)
 
