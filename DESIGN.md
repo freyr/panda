@@ -55,6 +55,6 @@ Packets of Jobs are schedule to run on Kubernetes Cluster (Targets).
 * TargetFulfilment is keeping track of Pod progress and status
 
 ### OrderFulfilment
-* Represents (partial) scheduling of Jobs from single Order
+* Represents (partial) scheduling of Items from single Order
 * Is used to monitor Order progression and status
 * Is used to monitor Job progression and status

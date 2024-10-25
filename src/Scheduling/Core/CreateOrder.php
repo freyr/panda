@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core;
 
+use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
+use Freyr\Panda\QA\Scheduling\Core\Order\OrderFactory;
+use Freyr\Panda\QA\Scheduling\Core\Order\OrderRepository;
+
 final readonly class CreateOrder
 {
 

@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Panda\QA\Scheduling\Core;
+namespace Freyr\Panda\QA\Scheduling\Core\Order;
+
+use Freyr\Panda\QA\Scheduling\Core\Target\TargetPolicy;
+use Freyr\Panda\QA\SharedKernel\Identity;
 
 interface NewOrder
 {
@@ -14,5 +17,5 @@ interface NewOrder
 
     public function getPacketId(): Identity;
 
-
+    public function getNewOrderId(): Identity;
 }

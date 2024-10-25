@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Panda\QA\Scheduling\Core;
+namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
 interface OrderRepository
 {
