@@ -2,7 +2,7 @@
 
 ## Overview
 Given that some Order is created, make a request to send some of its Items to Runner
-- Only CREATED jobs can be sent
+- Only CREATED Items can be sent
 - Runner will accept any number of Items but only first 8 will be executed. The rest will be ignored.
 
 TASK:

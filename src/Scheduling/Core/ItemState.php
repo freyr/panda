@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core;
 
-enum JobState: string
+enum ItemState: string
 {
     case CREATED = 'created';
     case IN_PROGRESS = 'inprogress';
