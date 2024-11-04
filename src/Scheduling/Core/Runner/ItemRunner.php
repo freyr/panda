@@ -6,7 +6,7 @@ namespace Freyr\Panda\QA\Scheduling\Core\Runner;
 
 use Freyr\Panda\QA\Scheduling\Core\Order\Item;
 
-interface JobRunner
+interface ItemRunner
 {
     public function run(Item ...$job): void;
 }
