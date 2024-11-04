@@ -10,4 +10,5 @@ class Job
 {
 
     readonly public TargetPolicy $targetPolicy;
+    private JobState $jobState;
 }

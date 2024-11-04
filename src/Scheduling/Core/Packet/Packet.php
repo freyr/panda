@@ -8,6 +8,7 @@ use Freyr\Panda\QA\Scheduling\Core\Job;
 
 class Packet
 {
+    public PacketStatus $status;
 
     /**
      * @return Job[]

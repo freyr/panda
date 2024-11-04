@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
+use Freyr\Panda\QA\Scheduling\Application\Identity;
 use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
-use Freyr\Panda\QA\SharedKernel\Id;
-use Freyr\Panda\QA\SharedKernel\Identity;
+use Freyr\Panda\QA\Identity\Id;
+use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
+use RuntimeException;
 
 class Order
 {
@@ -36,6 +38,10 @@ class Order
         Packet $packet,
     ): Order
     {
+        if($packet->status === PacketStatus::DISABLED) {
+            throw new RuntimeException();
+        }
+
         $order = new self(
             $newOrder->getNewOrderId(),
             $newOrder->getPriority()
@@ -50,7 +56,7 @@ class Order
 
     private function addItem(Item $item): void
     {
-        $this->items[$item->id->toString()] = $item;
+        $this->items[(string) $item->id] = $item;
     }
 
     protected function popRecordedEvents(): array

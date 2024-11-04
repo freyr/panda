@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Freyr\Panda\QA\Scheduling\Application;
 
 use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
+use Freyr\Panda\QA\Scheduling\Core\OwnerId;
 use Freyr\Panda\QA\Scheduling\Core\Target\Policy;
 use Freyr\Panda\QA\Scheduling\Core\Target\Target;
 use Freyr\Panda\QA\Scheduling\Core\Target\TargetPolicy;
-use Freyr\Panda\QA\SharedKernel\Id;
-use Freyr\Panda\QA\SharedKernel\Identity;
+use Freyr\Panda\QA\Identity\Id;
 
 readonly class NewOrderForm implements NewOrder
 {
@@ -30,9 +30,9 @@ readonly class NewOrderForm implements NewOrder
     }
     private Identity $identityFactory;
 
-    public function ownerId(): Identity
+    public function ownerId(): OwnerId
     {
-        return Id::fromString($this->ownerId);
+        return OwnerId::fromString($this->ownerId);
     }
 
     public function getPriority(): int

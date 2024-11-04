@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
+use Freyr\Panda\QA\Scheduling\Application\Identity;
 use Freyr\Panda\QA\Scheduling\Core\Target\Target;
-use Freyr\Panda\QA\SharedKernel\Identity;
 
 class Item
 {

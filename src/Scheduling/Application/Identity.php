@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Panda\QA\SharedKernel;
+namespace Freyr\Panda\QA\Scheduling\Application;
 
 interface Identity
 {

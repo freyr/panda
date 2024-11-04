@@ -9,7 +9,7 @@ use Freyr\Panda\QA\Scheduling\Core\CreateOrder;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderFactory;
 use Freyr\Panda\QA\Scheduling\Infrastructure\OrderInMemoryRepository;
 use Freyr\Panda\QA\Scheduling\Infrastructure\PacketInMemoryRepository;
-use Freyr\Panda\QA\SharedKernel\Id;
+use Freyr\Panda\QA\Identity\Id;
 use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
