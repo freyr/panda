@@ -18,19 +18,11 @@ class Order
     private array $items;
 
     public function __construct(
-        public readonly Identity $id,
+        public readonly OrderId $id,
         private int $priority,
     )
     {
 
-    }
-
-    public function rescheduleSingleItem(ItemId $identity): void
-    {
-        $item = $this->items[(string) $identity];
-        if (!$item->reschedule()) {
-            throw new CannotRescheduleItem($identity);
-        }
     }
 
     public static function new(
@@ -57,12 +49,5 @@ class Order
     private function addItem(Item $item): void
     {
         $this->items[(string) $item->id] = $item;
-    }
-
-    protected function popRecordedEvents(): array
-    {
-        $events = $this->events;
-        $this->events = [];
-        return $events;
     }
 }

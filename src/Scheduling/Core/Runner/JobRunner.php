@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core\Runner;
 
-use Freyr\Panda\QA\Scheduling\Core\Job;
+use Freyr\Panda\QA\Scheduling\Core\Order\Item;
 
 interface JobRunner
 {
-    public function run(Job ...$job): void;
+    public function run(Item ...$job): void;
 }

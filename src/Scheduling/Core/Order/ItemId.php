@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
-class ItemId extends Id
+use Freyr\Panda\QA\Identity\Id;
+use Freyr\Panda\QA\Scheduling\Application\Identity;
+
+class ItemId extends Id implements Identity
 {
 
 }
