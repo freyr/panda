@@ -8,6 +8,7 @@ use Freyr\Panda\QA\Identity\Id;
 use Freyr\Panda\QA\Scheduling\Application\NewOrderForm;
 use Freyr\Panda\QA\Scheduling\Core\CreateOrder;
 use Freyr\Panda\QA\Scheduling\Core\Job;
+use Freyr\Panda\QA\Scheduling\Core\Order\Item;
 use Freyr\Panda\QA\Scheduling\Core\Order\ItemState;
 use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
 use Freyr\Panda\QA\Scheduling\Core\Order\Order;
@@ -124,14 +125,13 @@ class OrderTest extends TestCase
         self::assertEquals($newOrderId, $order->id);
         self::assertCount(11, $order->getItems());
 
+        $runner = $this->getMockBuilder(ItemRunner::class)->disableOriginalConstructor()->getMock();
+        $runner->expects(self::atLeastOnce())->method('run');
         $order->execute($runner);
-
-        // mock the runner, ensure that runner method is called
-
-        // check number of Items that was actually executed (sent)
-
-        // check if those Items "know" that they were executed
-
-
+        self::assertCount(8, $order->getItems(true));
+        $items = $order->getItems(true);
+        foreach ($items as $item) {
+            self::assertTrue($item->wasExecuted());
+        }
     }
 }

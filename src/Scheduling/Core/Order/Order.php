@@ -70,8 +70,22 @@ class Order
         }
     }
 
-    public function getItems(): array
+    /**
+     * @param bool $onlyExecuted
+     * @return array<int, Item>
+     */
+    public function getItems(bool $onlyExecuted = false): array
     {
-        return $this->items;
+        $items = [];
+        foreach ($this->items as $item) {
+            if ($onlyExecuted) {
+                if ($item->wasExecuted()) {
+                    $items[] = $item;
+                }
+            } else {
+                $items[] = $item;
+            }
+        }
+        return $items;
     }
 }

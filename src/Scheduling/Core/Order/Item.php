@@ -11,6 +11,11 @@ use Freyr\Panda\QA\Tests\Scheduling\Core\JobId;
 class Item
 {
 
+    /**
+     * @var true
+     */
+    private bool $wasExecuted = false;
+
     public function __construct(
         public readonly Identity $id,
         public readonly JobId $jobId,
@@ -26,13 +31,21 @@ class Item
 
     }
 
+    public function wasExecuted(): bool
+    {
+        return $this->wasExecuted;
+    }
+
     public function execute(): void
     {
         $this->state = ItemState::IN_PROGRESS;
+        $this->wasExecuted = true;
     }
 
     public function serialise(): string
     {
-        return json_encode($this);
+        return json_encode(
+            ['jobId' => (string) $this->jobId, 'target' => $this->target->value, 'priority' => $this->priority]
+        );
     }
 }
