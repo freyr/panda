@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Panda\QA\Scheduling\Infrastructure;
+namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
 use Freyr\Panda\QA\Identity\Id;
-use Freyr\Panda\QA\Scheduling\Core\Order\Item;
-use Freyr\Panda\QA\Scheduling\Core\Order\ItemState;
-use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
-use Freyr\Panda\QA\Scheduling\Core\Order\OrderId;
 use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
 use Freyr\Panda\QA\Scheduling\Core\Runner\ItemRunner;
@@ -72,7 +68,10 @@ class Order
                 return;
             }
         }
+    }
 
-        return;
+    public function getItems(): array
+    {
+        return $this->items;
     }
 }
