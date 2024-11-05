@@ -12,7 +12,9 @@ class Item
 
     public function __construct(
         public readonly Identity $id,
-        public readonly Target $target
+        public readonly Target $target,
+        public readonly int $priority,
+        private ItemState $state,
     )
     {
     }
@@ -21,5 +23,20 @@ class Item
     {
         $this->status = 'reschedule';
         return true;
+    }
+
+    public function canBeExecuted(): bool
+    {
+        return $this->state === ItemState::CREATED;
+    }
+
+    public function execute()
+    {
+        $this->state = ItemState::IN_PROGRESS;
+    }
+
+    public function serialise(): string
+    {
+
     }
 }

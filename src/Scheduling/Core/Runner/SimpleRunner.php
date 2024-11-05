@@ -6,7 +6,11 @@ namespace Freyr\Panda\QA\Scheduling\Core\Runner;
 
 use Freyr\Panda\QA\Scheduling\Core\Order\Item;
 
-interface ItemRunner
+class SimpleRunner implements ItemRunner
 {
-    public function run(string $item): void;
+
+    public function run(string $item): void
+    {
+        //..
+    }
 }

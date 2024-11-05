@@ -8,6 +8,7 @@ use Freyr\Panda\QA\Scheduling\Application\Identity;
 use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Identity\Id;
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
+use Freyr\Panda\QA\Scheduling\Core\Runner\ItemRunner;
 use RuntimeException;
 
 class Order
@@ -40,7 +41,7 @@ class Order
         );
         foreach ($packet->getJobs() as $job) {
             $target = $job->targetPolicy->matchWith($newOrder->getOverrideTargetPolicy());
-            $item = new Item(Id::new(), $target, );
+            $item = new Item(Id::new(), $target, $job->priority);
             $order->addItem($item);
         }
         return $order;
@@ -49,5 +50,26 @@ class Order
     private function addItem(Item $item): void
     {
         $this->items[(string) $item->id] = $item;
+    }
+
+    public function execute(ItemRunner $runner): void
+    {
+        $max = 0;
+        $items = $this->items;
+        usort($items, function (Item $a, Item $b) {
+            return $a->priority <=> $b->priority;
+        });
+        foreach ($items as $item) {
+            if ($item->canBeExecuted()) {
+                $runner->run($item->serialise());
+                $item->execute();
+                $max++;
+            }
+            if ($max === 8) {
+                return;
+            }
+        }
+
+        return;
     }
 }
