@@ -26,10 +26,11 @@ class Item
 
     public function canBeExecuted(): bool
     {
-        return $this->state === ItemState::CREATED;
+        return $this->state === ItemState::CREATED || $this->target !== Target::PL;
+
     }
 
-    public function execute()
+    public function execute(): void
     {
         $this->state = ItemState::IN_PROGRESS;
     }

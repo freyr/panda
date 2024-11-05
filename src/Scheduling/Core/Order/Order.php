@@ -9,6 +9,7 @@ use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Identity\Id;
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
 use Freyr\Panda\QA\Scheduling\Core\Runner\ItemRunner;
+use Freyr\Panda\QA\Scheduling\Core\Target\Target;
 use RuntimeException;
 
 class Order
