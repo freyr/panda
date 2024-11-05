@@ -18,5 +18,5 @@ interface NewOrder
 
     public function getPacketId(): Identity;
 
-    public function getNewOrderId(): OrderId;
+    public function getOrderId(): OrderId;
 }

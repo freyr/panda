@@ -25,8 +25,8 @@ readonly class NewOrderForm implements NewOrder
     )
     {
         $this->targetPolicy = new TargetPolicy(
-            Policy::from($this->policy),
-            Target::from($this->target),
+            Policy::tryFrom($this->policy) ?? Policy::ANY,
+            Target::tryFrom($this->target) ?? Target::US,
         );
     }
     private Identity $identityFactory;
@@ -51,7 +51,7 @@ readonly class NewOrderForm implements NewOrder
         return Id::fromString((string) $this->packetId);
     }
 
-    public function getNewOrderId(): OrderId
+    public function getOrderId(): OrderId
     {
         return $this->newOrderId;
     }

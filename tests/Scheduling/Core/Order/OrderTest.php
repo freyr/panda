@@ -6,23 +6,28 @@ namespace Freyr\Panda\QA\Tests\Scheduling\Core\Order;
 
 use Freyr\Panda\QA\Identity\Id;
 use Freyr\Panda\QA\Scheduling\Application\NewOrderForm;
+use Freyr\Panda\QA\Scheduling\Core\CreateOrder;
 use Freyr\Panda\QA\Scheduling\Core\Job;
 use Freyr\Panda\QA\Scheduling\Core\Order\ItemState;
+use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
 use Freyr\Panda\QA\Scheduling\Core\Order\Order;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderId;
 use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
+use Freyr\Panda\QA\Scheduling\Core\Runner\ItemRunner;
 use Freyr\Panda\QA\Scheduling\Core\Target\Policy;
 use Freyr\Panda\QA\Scheduling\Core\Target\Target;
 use Freyr\Panda\QA\Scheduling\Core\Target\TargetPolicy;
+use Freyr\Panda\QA\Tests\Scheduling\Core\JobId;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
+
 class OrderTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldThrowExceptionOnBadState()
     {
         self::expectException(\RuntimeException::class);
@@ -39,6 +44,7 @@ class OrderTest extends TestCase
             PacketStatus::DISABLED,
             [
                 new Job(
+                    JobId::new(),
                     new TargetPolicy(Policy::ANY, Target::CA),
                     100,
                     ItemState::CREATED
@@ -49,9 +55,7 @@ class OrderTest extends TestCase
         Order::new($command, $packet);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateOrder()
     {
         $command = new NewOrderForm(
@@ -66,6 +70,7 @@ class OrderTest extends TestCase
             Id::new(), PacketStatus::ENABLED,
             [
                 new Job(
+                    JobId::new(),
                     new TargetPolicy(Policy::ANY, Target::CA),
                     100,
                     ItemState::CREATED
@@ -85,5 +90,48 @@ class OrderTest extends TestCase
 //        $items = $getter->call($order);
 
         self::assertCount(1, $order->getItems());
+
+        $command = $this->getMockBuilder(NewOrder::class)
+            ->enableAutoReturnValueGeneration()
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    #[Test]
+    public function shouldExecuteOrderWithRunnerMock()
+    {
+        $packet = new Packet(
+            Id::new(), PacketStatus::ENABLED,
+            [
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+                new Job(JobId::new(), new TargetPolicy(Policy::ANY, Target::CA), 100, ItemState::CREATED),
+            ]
+        );
+
+        $newOrderId = OrderId::new();
+        $command = new NewOrderForm('any', 'us', Id::new(), 100, Id::new(), $newOrderId);
+
+        $order = Order::new($command, $packet);
+        self::assertEquals($newOrderId, $order->id);
+        self::assertCount(11, $order->getItems());
+
+        $order->execute($runner);
+
+        // mock the runner, ensure that runner method is called
+
+        // check number of Items that was actually executed (sent)
+
+        // check if those Items "know" that they were executed
+
+
     }
 }

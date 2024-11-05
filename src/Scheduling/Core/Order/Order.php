@@ -19,7 +19,7 @@ class Order
 
     public function __construct(
         public readonly OrderId $id,
-        private int $priority,
+        public readonly int $priority,
     )
     {
 
@@ -35,12 +35,12 @@ class Order
         }
 
         $order = new self(
-            $newOrder->getNewOrderId(),
+            $newOrder->getOrderId(),
             $newOrder->getPriority()
         );
         foreach ($packet->getJobs() as $job) {
             $target = $job->targetPolicy->matchWith($newOrder->getOverrideTargetPolicy());
-            $item = new Item(Id::new(), $target, $job->priority, ItemState::CREATED);
+            $item = new Item(Id::new(), $job->id, $target, $job->priority, ItemState::CREATED);
             $order->addItem($item);
         }
         return $order;
