@@ -16,7 +16,7 @@ class Id implements Identity
     }
     public static function new(): static
     {
-        return new self(Uuid::uuid7());
+        return new static(Uuid::uuid7());
     }
 
     public static function fromString(string $id): static

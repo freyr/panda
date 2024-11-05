@@ -15,8 +15,7 @@ class Item
         public readonly Target $target,
         public readonly int $priority,
         private ItemState $state,
-    )
-    {
+    ) {
     }
 
     public function reschedule(): bool
@@ -33,10 +32,5 @@ class Item
     public function execute()
     {
         $this->state = ItemState::IN_PROGRESS;
-    }
-
-    public function serialise(): string
-    {
-
     }
 }

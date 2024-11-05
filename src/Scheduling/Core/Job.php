@@ -10,7 +10,12 @@ use Freyr\Panda\QA\Scheduling\Core\Target\TargetPolicy;
 class Job
 {
 
-    readonly public TargetPolicy $targetPolicy;
-    public readonly int $priority;
-    private ItemState $jobState;
+    public function __construct(
+        public readonly TargetPolicy $targetPolicy,
+        public readonly int $priority,
+        public readonly ItemState $jobState
+    )
+    {
+
+    }
 }

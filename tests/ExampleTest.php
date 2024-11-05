@@ -7,6 +7,7 @@ namespace Freyr\Panda\QA\Tests;
 use Freyr\Panda\QA\Scheduling\Application\NewOrderForm;
 use Freyr\Panda\QA\Scheduling\Core\CreateOrder;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderFactory;
+use Freyr\Panda\QA\Scheduling\Core\Order\OrderId;
 use Freyr\Panda\QA\Scheduling\Infrastructure\OrderInMemoryRepository;
 use Freyr\Panda\QA\Scheduling\Infrastructure\PacketInMemoryRepository;
 use Freyr\Panda\QA\Identity\Id;
@@ -30,7 +31,7 @@ class ExampleTest extends TestCase
             Id::new(),
             100,
             Id::new(),
-            Id::new(),
+            OrderId::new(),
         );
         $handler($command);
 

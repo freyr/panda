@@ -41,7 +41,7 @@ class Order
         );
         foreach ($packet->getJobs() as $job) {
             $target = $job->targetPolicy->matchWith($newOrder->getOverrideTargetPolicy());
-            $item = new Item(Id::new(), $target, $job->priority);
+            $item = new Item(Id::new(), $target, $job->priority, ItemState::CREATED);
             $order->addItem($item);
         }
         return $order;

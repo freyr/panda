@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Freyr\Panda\QA\Scheduling\Application;
 
 use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
+use Freyr\Panda\QA\Scheduling\Core\Order\OrderId;
 use Freyr\Panda\QA\Scheduling\Core\OwnerId;
 use Freyr\Panda\QA\Scheduling\Core\Target\Policy;
 use Freyr\Panda\QA\Scheduling\Core\Target\Target;
@@ -20,7 +21,7 @@ readonly class NewOrderForm implements NewOrder
         private Identity $packetId,
         private int $priority,
         private Identity $ownerId,
-        private Identity $newOrderId,
+        private OrderId $newOrderId,
     )
     {
         $this->targetPolicy = new TargetPolicy(
@@ -32,7 +33,7 @@ readonly class NewOrderForm implements NewOrder
 
     public function ownerId(): OwnerId
     {
-        return OwnerId::fromString($this->ownerId);
+        return OwnerId::fromString((string) $this->ownerId);
     }
 
     public function getPriority(): int
@@ -47,11 +48,11 @@ readonly class NewOrderForm implements NewOrder
 
     public function getPacketId(): Identity
     {
-        return Id::fromString($this->packetId);
+        return Id::fromString((string) $this->packetId);
     }
 
-    public function getNewOrderId(): Identity
+    public function getNewOrderId(): OrderId
     {
-        $this->newOrderId;
+        return $this->newOrderId;
     }
 }

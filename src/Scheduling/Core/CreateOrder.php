@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Freyr\Panda\QA\Scheduling\Core;
 
-use Freyr\Panda\QA\Scheduling\Application\OrderService;
 use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderFactory;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderRepository;
 
-final readonly class CreateOrder implements OrderService
+final readonly class CreateOrder
 {
 
     public function __construct(
@@ -24,10 +23,5 @@ final readonly class CreateOrder implements OrderService
     {
         $order = $this->orderFactory->new($newOrder);
         $this->repository->persist($order);
-    }
-
-    public function createOrder(NewOrder $order): void
-    {
-        $this($order);
     }
 }
