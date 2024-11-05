@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Freyr\Panda\QA\Scheduling\Core\Order;
 
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketRepository;
-use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
-use RuntimeException;
+use Freyr\Panda\QA\Scheduling\Infrastructure\Order;
 
 readonly class OrderFactory
 {

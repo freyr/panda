@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Freyr\Panda\QA\Scheduling\Infrastructure;
 
 use Freyr\Panda\QA\Scheduling\Application\Identity;
-use Freyr\Panda\QA\Scheduling\Core\Order\Order;
 use Freyr\Panda\QA\Scheduling\Core\Order\OrderRepository;
 
 class OrderInMemoryRepository implements OrderRepository

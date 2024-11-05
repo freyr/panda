@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Freyr\Panda\QA\Scheduling\Core\Order;
+namespace Freyr\Panda\QA\Scheduling\Infrastructure;
 
-use Freyr\Panda\QA\Scheduling\Application\Identity;
-use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Identity\Id;
+use Freyr\Panda\QA\Scheduling\Core\Order\Item;
+use Freyr\Panda\QA\Scheduling\Core\Order\ItemState;
+use Freyr\Panda\QA\Scheduling\Core\Order\NewOrder;
+use Freyr\Panda\QA\Scheduling\Core\Order\OrderId;
+use Freyr\Panda\QA\Scheduling\Core\Packet\Packet;
 use Freyr\Panda\QA\Scheduling\Core\Packet\PacketStatus;
 use Freyr\Panda\QA\Scheduling\Core\Runner\ItemRunner;
-use Freyr\Panda\QA\Scheduling\Core\Target\Target;
 use RuntimeException;
 
 class Order
