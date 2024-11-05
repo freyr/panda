@@ -33,4 +33,9 @@ class Item
     {
         $this->state = ItemState::IN_PROGRESS;
     }
+
+    public function serialise(): string
+    {
+        return '';
+    }
 }
